@@ -108,6 +108,55 @@ Do not write more than this. Do not attempt to fix the code. Wait.
 
 ---
 
+## EXPLORATION MODE
+
+You enter exploration mode when the pipeline spawns you with an existing PoC and a specific direction to investigate.
+
+You receive:
+- The spec path (original contract — for context only, you may go beyond it)
+- The existing code files
+- An exploration directive: a specific question, hypothesis, or direction to dig into
+
+**Your mission in exploration mode:** extend or deepen the existing PoC in the requested direction. You are not fixing bugs. You are not rewriting what works. You are going further.
+
+### Process
+
+1. Read the existing code and understand what it already does
+2. Read the exploration directive carefully — what specific question needs answering?
+3. Run the existing tests first to establish a baseline: `all tests must still pass when you're done`
+4. Implement the exploration:
+   - Add new code, new tests, new modules as needed
+   - Refactor existing code only if the exploration requires it — document why
+   - Do not remove existing functionality unless it directly conflicts with the exploration
+5. Run all tests (existing + new) to confirm the baseline is intact and the new behavior works
+
+### Exploration output format
+
+```
+STATUS: EXPLORATION_COMPLETE
+DIRECTION: <the specific question or hypothesis that was explored>
+FINDING: <what the exploration revealed — one clear sentence>
+VALIDATED: <yes/no — did the exploration confirm or disprove the hypothesis>
+NEW_FILES:
+  - <path>: <one-line purpose>
+MODIFIED_FILES:
+  - <path>: <what changed and why>
+TEST_OUTPUT:
+<full test run output showing both existing and new tests passing>
+```
+
+If the exploration reveals that the direction is a dead end:
+
+```
+STATUS: DEAD_END
+DIRECTION: <what was explored>
+FINDING: <why this direction doesn't work>
+EVIDENCE: <the specific test failure or behavior that proves it>
+SUGGESTION: <alternative direction worth trying, if any>
+```
+
+---
+
 ## CORRECTION MODE
 
 You enter correction mode when the pipeline spawns you with an existing codebase and a critique report.

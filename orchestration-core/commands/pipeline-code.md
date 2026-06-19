@@ -3,11 +3,32 @@
 Orchestrates: spec → poc-developer → critique-code → [fix loop] → gate
 
 ## Usage
-`/pipeline-code <topic | path to spec>`
+```
+/pipeline-code <topic | path to spec>
+/pipeline-code --explore <path to existing src> "<exploration directive>"
+```
 
 ---
 
-## Step 1 — Spec
+## Exploration mode (--explore)
+
+When called with `--explore`:
+
+1. Verify the path exists and contains code
+2. Locate the original spec at `spec/<slug>/spec.md` if it exists (optional context)
+3. Spawn `poc-developer` in **EXPLORATION MODE** with:
+   - The existing code path
+   - The spec path (if found)
+   - The exploration directive (the quoted string)
+4. On `STATUS: EXPLORATION_COMPLETE` → proceed to critique (Step 3) then gate (Step 4)
+5. On `STATUS: DEAD_END` → surface the finding and suggestion to the user. Ask: "This direction is a dead end. Try a different angle, or abandon?"
+6. On `STATUS: ESCALATION_NEEDED` → same as standard escalation
+
+Exploration output goes to `src/<slug>/` (extends the existing files in place).
+
+---
+
+## Step 1 — Spec (standard mode only)
 
 If the argument is a topic (not a path to an existing `spec.md`):
 - Run `/gen-code <topic>` first
