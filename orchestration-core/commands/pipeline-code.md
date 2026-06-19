@@ -69,15 +69,22 @@ Spawn `poc-developer` in **CORRECTION MODE** with:
 Increment `CRITIQUE_ROUND`.
 Go back to Step 3a.
 
-### Escalation after 3 critique rounds
+### After 3 failed critique rounds — quarantine and restart from scratch
 
 If the code still fails critique after 3 rounds:
-1. Move the artifact to `.quarantine/<slug>/round-<n>/`
-2. Report to the user:
-   - All CRITICAL items that remain unresolved
-   - The history of correction attempts
-3. Ask: "The code failed critique after 3 correction rounds. How would you like to proceed?"
-4. Do NOT run the gate on a failing artifact.
+1. Move the entire artifact to `.quarantine/<slug>/attempt-<attempt_number>/`
+2. Increment the global attempt counter (`ATTEMPT_NUMBER`, starts at 1)
+3. If `ATTEMPT_NUMBER <= 2` — **restart from scratch**:
+   - Do NOT reuse any code from the quarantined attempt
+   - Spawn `poc-developer` again in **initial mode** with the same spec
+   - Reset `CRITIQUE_ROUND` to 1
+   - Continue from Step 3a
+4. If `ATTEMPT_NUMBER = 3` — the spec or concept itself may be the problem. Escalate:
+   - Report the full failure history (3 complete attempts, each quarantined)
+   - Ask the user: "Three full implementation attempts failed critique. The spec or the approach may need rethinking. How would you like to proceed?"
+   - Stop. Do NOT run the gate.
+
+**Total maximum attempts before escalation: 3 complete generation cycles × 3 critique rounds = 9 critique passes.**
 
 ---
 
