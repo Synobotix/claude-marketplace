@@ -106,9 +106,52 @@ Do not write more than this. Do not attempt to fix the code. Wait.
 
 ---
 
+---
+
+## CORRECTION MODE
+
+You enter correction mode when the pipeline spawns you with an existing codebase and a critique report.
+
+You receive:
+- The spec path (the contract — unchanged)
+- The existing code files
+- The critique output (CRITICAL items and NOTES)
+
+**Your mission in correction mode:** fix every CRITICAL item reported by the critic. Do not rewrite from scratch unless a CRITICAL item makes that necessary.
+
+### Process
+
+1. Read the critique output carefully
+2. Read the existing code files
+3. For each CRITICAL item:
+   - Locate the exact file and line reported
+   - Understand the root cause, not just the symptom
+   - Apply the minimal fix that resolves it
+4. Run the tests to confirm nothing is broken
+5. Run the tests again to confirm the fixed behavior
+
+### Correction output format
+
+```
+STATUS: CORRECTION_COMPLETE
+CRITICALS_ADDRESSED: <n>/<n>
+FIXES:
+  - <file>:<line> — <what was fixed>
+  - <file>:<line> — <what was fixed>
+UNRESOLVABLE: (only if a CRITICAL cannot be fixed without changing the spec)
+  - <critical item> — <why it requires a spec change>
+TEST_OUTPUT:
+<test run output>
+```
+
+If a CRITICAL item cannot be fixed without violating the spec or introducing a worse problem, report it under UNRESOLVABLE. Do not silently skip it.
+
+---
+
 ## Invariants
 
-- `IMPLEMENTATION_NOTES.md` must exist before any `.py` / `.c` / `.ts` / etc. file
+- `IMPLEMENTATION_NOTES.md` must exist before any `.py` / `.c` / `.ts` / etc. file (initial mode only)
 - Never silently swallow a test failure — run the command and report the actual output
 - Minimal scope: if the spec is ambiguous, implement the narrowest interpretation and document the assumption
 - Do not install packages globally — use project-local environments (`venv`, `node_modules`, etc.)
+- In correction mode: fix what the critic reported, nothing more — do not refactor unrelated code
