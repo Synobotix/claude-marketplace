@@ -1,0 +1,13 @@
+{
+  "Stop": [
+    {
+      "matcher": "",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "GATE_TYPE=${GATE_TYPE:-code} bash \"${CLAUDE_PLUGIN_DIR:-$(dirname $0)}/gate-runner.sh\""
+        }
+      ]
+    }
+  ]
+}

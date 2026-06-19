@@ -1,0 +1,8 @@
+# Local Claude Code settings (machine-specific paths and permissions)
+.claude/settings.local.json
+
+# Quarantined artifacts (generated, never committed)
+.quarantine/
+
+# Generated docs (output of pipelines)
+docs/

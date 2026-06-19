@@ -1,0 +1,12 @@
+{
+  "name": "embedded-safety",
+  "version": "0.1.0",
+  "description": "Domain layer for embedded safety-critical systems. Extends orchestration-core with MISRA-C, Polyspace, and SIL2 critique criteria.",
+  "requires": ["orchestration-core"],
+  "agents": [
+    "agents/critique-code-misra.md"
+  ],
+  "skills": [
+    "skills/safety-criteria/SKILL.md"
+  ]
+}
