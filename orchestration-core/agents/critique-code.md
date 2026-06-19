@@ -41,6 +41,11 @@ If any of these files are provided, ignore them — they would bias your review.
 - Is the test suite independent from the implementation (not testing implementation details)?
 - Are failure cases tested, not just success cases?
 - Are assertions specific enough to catch regressions?
+- **Mock API detection (CRITICAL risk)**: if the tests mock an external API client (OpenAI, requests, httpx, boto3, etc.), verify that:
+  - The mock matches the real API's response structure exactly (field names, types, nesting)
+  - The model/endpoint name used in the code is verified against the real provider's documented values
+  - At minimum one integration-style test exists that validates the real call path (even if skipped by default with `@pytest.mark.integration`)
+  - If all tests mock the external API with no integration test, flag as CRITICAL: "tests pass but real execution may fail — no test validates actual API contract"
 
 ---
 
