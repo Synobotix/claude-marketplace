@@ -4,6 +4,7 @@
 
 set -euo pipefail
 
+PLUGIN_ROOT="${CLAUDE_PLUGIN_ROOT:-$(dirname "$0")/..}"
 PROJECT_ROOT="${PROJECT_ROOT:-$PWD}"
 GATE_CONFIG="$PROJECT_ROOT/gates.config"
 QUARANTINE="$PROJECT_ROOT/.quarantine"

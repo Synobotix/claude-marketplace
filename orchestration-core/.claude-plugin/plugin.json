@@ -1,24 +1,8 @@
 {
   "name": "orchestration-core",
-  "version": "0.1.0",
-  "description": "Core orchestration layer: gen/critique/gate triad for code, documentation, and article generation. Implements GAR (Governed Agent Runtime) policy invariants.",
-  "agents": [
-    "agents/poc-developer.md",
-    "agents/critique-code.md",
-    "agents/critique-doc.md",
-    "agents/fact-checker.md"
-  ],
-  "skills": [
-    "skills/constitution/SKILL.md",
-    "skills/gen-code/SKILL.md",
-    "skills/gen-doc/SKILL.md",
-    "skills/gen-article/SKILL.md"
-  ],
-  "commands": [
-    "commands/pipeline-code.md",
-    "commands/pipeline-doc.md",
-    "commands/pipeline-article.md"
-  ],
-  "hooks": "hooks/hooks.json",
-  "mcp": ".mcp.json"
+  "description": "Core gen/critique/gate orchestration pipeline for code, documentation, and article generation. Implements GAR (Governed Agent Runtime) policy invariants with poc-developer, critique, fact-checker agents, and deterministic gates.",
+  "author": {
+    "name": "Synobotix",
+    "url": "https://github.com/Synobotix"
+  }
 }
