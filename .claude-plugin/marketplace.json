@@ -6,20 +6,20 @@
   },
   "metadata": {
     "description": "Synobotix plugins for gen/critique/gate orchestration and embedded safety-critical development.",
-    "version": "0.3.2"
+    "version": "0.3.3"
   },
   "plugins": [
     {
       "name": "orchestration-core",
       "description": "Core gen/critique/gate orchestration pipeline for code, doc, and article generation",
       "source": "./orchestration-core",
-      "version": "0.3.2"
+      "version": "0.3.3"
     },
     {
       "name": "embedded-safety",
       "description": "Domain layer for embedded safety-critical systems: MISRA-C, Polyspace, SIL2. Requires orchestration-core.",
       "source": "./embedded-safety",
-      "version": "0.3.2"
+      "version": "0.3.3"
     }
   ]
 }
