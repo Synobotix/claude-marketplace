@@ -30,12 +30,28 @@ Exploration output goes to `src/<slug>/` (extends the existing files in place).
 
 ## Step 1 — Spec (standard mode only)
 
-If the argument is a topic (not a path to an existing `spec.md`):
-- Run `/gen-code <topic>` first
-- Wait for spec to be written to `spec/<slug>/spec.md`
-- Continue with that spec path
+The spec is the single point of human control before full autonomy begins.
+It is ALWAYS written collaboratively — never generated autonomously.
 
-If the argument is already a spec path, proceed directly.
+If the argument is already a path to an existing `spec.md`, proceed directly to Step 2.
+
+If the argument is a topic:
+1. Derive a slug from the topic (lowercase, hyphens, no spaces)
+2. Ask the user the following questions (all in one message, do not proceed until answered):
+   - What is the goal of this PoC? What problem does it solve?
+   - What are the hard constraints? (language, dependencies, performance, interfaces)
+   - What does "done" look like? What must the PoC demonstrate?
+   - What is explicitly out of scope?
+3. Write `spec/<slug>/spec.md` from the answers. Structure:
+   ```
+   # <topic>
+   ## Goal
+   ## Constraints
+   ## Definition of Done
+   ## Out of scope
+   ```
+4. Show the spec to the user and ask: "Does this spec look correct? Proceed?"
+5. Do NOT continue to Step 2 until the user explicitly approves the spec.
 
 ---
 
