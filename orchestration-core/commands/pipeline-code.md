@@ -37,11 +37,11 @@ If the argument is already a path to an existing `spec.md`, proceed directly to 
 
 If the argument is a topic:
 1. Derive a slug from the topic (lowercase, hyphens, no spaces)
-2. Ask the user the following questions (all in one message, do not proceed until answered):
-   - What is the goal of this PoC? What problem does it solve?
-   - What are the hard constraints? (language, dependencies, performance, interfaces)
-   - What does "done" look like? What must the PoC demonstrate?
-   - What is explicitly out of scope?
+2. Use the AskUserQuestion tool with these 4 questions in a single call:
+   - "Quel est l'objectif de ce PoC ?" (header: "Objectif") — options: suggest 2-3 plausible goals inferred from the topic + "Autre"
+   - "Quelles sont les contraintes techniques ?" (header: "Contraintes") — options: infer likely stack from topic (e.g. Python, TypeScript, Rust) + "Autre"
+   - "C'est quoi le critère de succès ?" (header: "Succès") — options: 2-3 concrete outcomes inferred from topic + "Autre"
+   - "Qu'est-ce qui est hors périmètre ?" (header: "Hors scope") — options: 2-3 common exclusions for this type of PoC + "Autre"
 3. Write `spec/<slug>/spec.md` from the answers. Structure:
    ```
    # <topic>
@@ -50,8 +50,7 @@ If the argument is a topic:
    ## Definition of Done
    ## Out of scope
    ```
-4. Show the spec to the user and ask: "Does this spec look correct? Proceed?"
-5. Do NOT continue to Step 2 until the user explicitly approves the spec.
+4. Show the spec to the user and use AskUserQuestion: "Cette spec est-elle correcte ?" with options "Oui, on y va" / "Non, à modifier" — do NOT proceed to Step 2 until the user selects "Oui, on y va".
 
 ---
 
