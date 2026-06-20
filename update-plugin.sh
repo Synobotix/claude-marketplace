@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Update orchestration-core plugin to latest GitHub version.
-# Run this after pushing changes to the marketplace repo.
+# Clear all plugin caches and reinstall from GitHub.
+# Run this after a new release (bash release.sh) has been pushed.
 set -euo pipefail
 
 PLUGIN="orchestration-core@synobotix"
@@ -8,11 +8,8 @@ CACHE="$HOME/.claude/plugins/cache/synobotix/orchestration-core"
 MARKETPLACE="$HOME/.claude/plugins/marketplaces/synobotix"
 INSTALLED="$HOME/.claude/plugins/installed_plugins.json"
 
-echo "Clearing plugin cache..."
-rm -rf "$CACHE"
-
-echo "Clearing marketplace cache..."
-rm -rf "$MARKETPLACE"
+echo "Clearing caches..."
+rm -rf "$CACHE" "$MARKETPLACE"
 
 echo "Removing installed_plugins.json entry..."
 tmp=$(mktemp)
