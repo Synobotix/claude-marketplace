@@ -12,7 +12,7 @@ rm -rf "$CACHE"
 
 echo "Removing installed_plugins.json entry..."
 tmp=$(mktemp)
-jq 'del(."orchestration-core@synobotix")' "$INSTALLED" > "$tmp" && mv "$tmp" "$INSTALLED"
+jq 'del(.plugins["orchestration-core@synobotix"])' "$INSTALLED" > "$tmp" && mv "$tmp" "$INSTALLED"
 
 echo "Done. In Claude Code, run:"
 echo "  /plugin marketplace update synobotix"
