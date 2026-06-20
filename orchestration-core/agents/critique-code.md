@@ -41,6 +41,7 @@ If any of these files are provided, ignore them — they would bias your review.
 - Is the test suite independent from the implementation (not testing implementation details)?
 - Are failure cases tested, not just success cases?
 - Are assertions specific enough to catch regressions?
+- **Weak mock assertions (CRITICAL risk)**: if a test uses `assert_called_once()` or `assert_called()` without verifying arguments (i.e., without `assert_called_once_with(...)` or inspecting `call_args`), flag as CRITICAL: "mock asserts the function was called but not how — parameter bugs pass undetected"
 - **Mock API detection (CRITICAL risk)**: if the tests mock an external API client (OpenAI, requests, httpx, boto3, etc.), verify that:
   - The mock matches the real API's response structure exactly (field names, types, nesting)
   - The model/endpoint name used in the code is verified against the real provider's documented values
