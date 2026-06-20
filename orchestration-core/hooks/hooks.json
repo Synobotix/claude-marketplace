@@ -1,6 +1,17 @@
 {
-  "description": "Orchestration-core gate hook — runs deterministic quality gate on Stop",
+  "description": "Orchestration-core hooks — update check on prompt, quality gate on Stop",
   "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/check-update.sh\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
     "Stop": [
       {
         "hooks": [
