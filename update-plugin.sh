@@ -5,10 +5,14 @@ set -euo pipefail
 
 PLUGIN="orchestration-core@synobotix"
 CACHE="$HOME/.claude/plugins/cache/synobotix/orchestration-core"
+MARKETPLACE="$HOME/.claude/plugins/marketplaces/synobotix"
 INSTALLED="$HOME/.claude/plugins/installed_plugins.json"
 
 echo "Clearing plugin cache..."
 rm -rf "$CACHE"
+
+echo "Clearing marketplace cache..."
+rm -rf "$MARKETPLACE"
 
 echo "Removing installed_plugins.json entry..."
 tmp=$(mktemp)
